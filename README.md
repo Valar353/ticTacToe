@@ -1,4 +1,4 @@
-# ticTacToe \n
+# ticTacToe  
 Крестики нолики 
 В modules/config записать данные своей бд
 Запуст команду npm run initDB
