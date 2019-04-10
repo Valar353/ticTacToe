@@ -81,3 +81,17 @@ async function addTriger(){
 }
 createTable();
 createTable2();
+
+
+
+
+// DECLARE
+// key integer;
+// curs4 CURSOR FOR SELECT * FROM tenk1 WHERE id = key;
+// crs_my CURSOR FOR select id_per, rashod, summa from test.test where
+// id_user = _id_user order by id_per;
+// BEGIN
+// key := 42;
+// OPEN curs4;
+//
+// исп FETCH

@@ -4,10 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "init": "node ./modules/init",
-    "ct": "node ./modules/createTrigger",
-    "tt": "node ./modules/truncateTable",
-    "at": "node ./modules/addTriger"
+    "initDB": "node ./modules/init"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

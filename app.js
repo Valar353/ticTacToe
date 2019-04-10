@@ -9,15 +9,6 @@ var users = require('./routes/users');
 const Pool = require('pg').Pool;
 
 var app = express();
-
-
-
-
-
-
-
-
-
 var game = require('./routes/game');
 const config   = require('./modules/config');
 
@@ -34,77 +25,38 @@ app.post('/game', function(req, res, next) {
         break;
       }
     }
-
     const arr = [[1,'a'],[1,'b'],[1,'c'],[2,'a'],[2,'b'],[2,'c'],[3,'a'],[3,'b'],[3,'c']];
     let rowCol = arr[n-1]
-    // console.log('номер ячейки',n);
-    // console.log('ячейкa',rowCol);
-    // console.log('пост запрос', );
     let pool = new Pool(config);
-console.log(req.body);
     if(Object.keys(req.body)=='truncate'){
-      (async function(){
-        await pool.query(`
+        pool.query(`
           TRUNCATE TABLE ticTacToe;
           INSERT INTO ticTacToe VALUES (DEFAULT,DEFAULT,DEFAULT,1),(DEFAULT,DEFAULT,DEFAULT,2),(DEFAULT,DEFAULT,DEFAULT,3)
         `);
-        await pool.query(`
+        pool.query(`
           TRUNCATE TABLE ticTacToeForTrigger;
           INSERT INTO ticTacToeForTrigger VALUES (DEFAULT,DEFAULT,DEFAULT,1),(DEFAULT,DEFAULT,DEFAULT,2),(DEFAULT,DEFAULT,DEFAULT,3)
         `,()=>{
           pool.end();
           res.redirect('back');
         });
-      })();
     }else{
-      async function init(res){
-
-
-        let response = await pool.query(`
+       function init(res){
+        let response = pool.query(`
           UPDATE ticTacToe
           SET ${rowCol[1]} = true
           where ${rowCol[0]} = id;
           UPDATE ticTacToeForTrigger
           SET ${rowCol[1]} = true
           where ${rowCol[0]} = id;
-        `,async function(){
-          // console.dir(response);
-          await pool.end()
+        `,function(){
+          pool.end()
           res.redirect('back');
         });
-
       }
       init(res);
-
-
     }
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
